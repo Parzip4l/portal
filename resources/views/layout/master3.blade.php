@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-Template Name: TRUEST HRIS APPS
+Template Name: Champoil Portal - Admin Champoil Super Apps
 Author: RinableCreative
 Website: https://www.rinablecreative.com
 Portfolio: https://behance.net/muhamadsobirin3
@@ -30,6 +30,12 @@ Portfolio: https://behance.net/muhamadsobirin3
   <!-- plugin css -->
   <link href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <script>
+        var token = '{{ Session::get("token") }}';
+        if (token) {
+            localStorage.setItem('apiToken', token);
+        }
+    </script>
   <!-- end plugin css -->
 
   @stack('plugin-styles')
@@ -45,14 +51,17 @@ Portfolio: https://behance.net/muhamadsobirin3
   <script src="{{ asset('assets/js/spinner.js') }}"></script>
 
   <div class="main-wrapper" id="app">
-    <div class="page-wrapper full-page">
-      @yield('content')
+    <div class="page-wrapper">
+      <div class="page-content">
+        @yield('content')
+      </div>
     </div>
   </div>
 
     <!-- base js -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('assets/plugins/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <!-- end base js -->
 
     <!-- plugin js -->

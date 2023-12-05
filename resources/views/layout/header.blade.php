@@ -3,7 +3,7 @@
     <div class="container">
       <div class="navbar-content">
         <a href="#" class="navbar-brand">
-          TRUE<span>ST</span>
+          CHAMPOIL<span>PORTAL</span>
         </a>
         <form class="search-form">
           <div class="input-group">
@@ -27,7 +27,9 @@
                 <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @php
                     // Ambil nama produk berdasarkan product_id
-                    $employeeDetails = \App\Employee::where('nik', Auth::user()->employee_code)->first();
+                    $employeeCode = optional(Auth::user())->employee_code;
+
+                    $employeeDetails = \App\Employee::where('nik', $employeeCode)->first();
                     $employee = \App\Employee::where('nik', Auth::user()->name)->first();
                 @endphp
                 <img class="wd-30 ht-30 rounded-circle" src="{{ asset('images/' . $employeeDetails->gambar) }}" alt="{{$employee->nama}}">
@@ -285,7 +287,7 @@
                             <li class="nav-item"><a href="{{ route('knowledge_base.index') }}" class="nav-link {{ active_class(['#']) }}">E-Learning</a></li>
                             <li class="nav-item"><a href="{{ url('#') }}" class="nav-link {{ active_class(['#']) }}">Document Controls</a></li>
                             <li class="nav-item"><a href="{{ url('#') }}" class="nav-link {{ active_class(['#']) }}">FPTK</a></li>
-                            <li class="nav-item"><a href="{{ url('#') }}" class="nav-link {{ active_class(['#']) }}">Pencatatan Limbah B3</a></li>
+                            <li class="nav-item"><a href="{{ url('pencatatan-limbah') }}" class="nav-link {{ active_class(['pencatatan-limbah']) }}">Pencatatan Limbah B3</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
@@ -341,7 +343,7 @@
                 <ul class="submenu-item">
                     <li class="nav-item"><a href="{{ url('/#') }}" class="nav-link {{ active_class(['#']) }}">Qc</a></li>
                     <li class="nav-item"><a href="{{ url('rnd-check') }}" class="nav-link {{ active_class(['rnd-check']) }}">RnD</a></li>
-                    <li class="nav-item"><a href="{{ url('#') }}" class="nav-link {{ active_class(['#']) }}">Pencatatan Limbah B3</a></li>
+                    <li class="nav-item"><a href="{{ url('pencatatan-limbah') }}" class="nav-link {{ active_class(['pencatatan-limbah']) }}">Pencatatan Limbah B3</a></li>
                 </ul>
             </div>
         </li>

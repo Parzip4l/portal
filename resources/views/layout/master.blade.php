@@ -14,7 +14,7 @@ Portfolio: https://behance.net/muhamadsobirin3
 	<meta name="author" content="Rinable Creative">
 	<meta name="keywords" content="superapp, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web">
 
-  <title>TRUEST - HRIS Apps</title>
+  <title>CHAMPOIL - Portal Apps</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

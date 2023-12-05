@@ -258,6 +258,9 @@ Route::controller(LoginController::class)->group(function(){
     Route::post('login/proses','proses');
 });
 
+// Limbah B3
+Route::resource('pencatatan-limbah',App\Http\Controllers\B3\LimbahController::class);
+
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('login');
