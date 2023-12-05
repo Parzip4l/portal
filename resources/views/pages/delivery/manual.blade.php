@@ -112,6 +112,8 @@
                             <label for="" class="form-label">Ekspedisi</label>
                             <input type="text" class="form-control" name="ekspedisi" required>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6 mb-2">
                             <label for="" class="form-label">Nama Barang</label>
                             <input type="text" class="form-control" name="nama_barang" required>
@@ -124,6 +126,8 @@
                             <label for="" class="form-label">Sisa Order</label>
                             <input type="text" class="form-control" name="sisa_order">
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6 mb-2">
                             <label for="" class="form-label">Driver</label>
                             <select name="driver" class="form-control" id="">

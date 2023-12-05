@@ -9,5 +9,5 @@ class LimbahModel extends Model
 {
     use HasFactory;
     protected $table = 'limbahData';
-    protected $fillable = ['tanggal','jenis','asal','jumlah'];
+    protected $fillable = ['tanggal','jenis','asal','jumlah','uom'];
 }

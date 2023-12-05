@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 Use App\B3\LimbahModel;
 use App\Slack;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\LimbahExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LimbahController extends Controller
 {
@@ -51,9 +53,10 @@ class LimbahController extends Controller
             $limbahdata->jenis = $request->jenis;
             $limbahdata->asal = $request->asal;
             $limbahdata->jumlah = $request->jumlah;
+            $limbahdata->uom = $request->uom;
             $limbahdata->save();
 
-            $slackChannel = Slack::where('channel', 'Limbah B3')->first();
+            $slackChannel = Slack::where('channel', 'Testing Channel')->first();
             $slackWebhookUrl = $slackChannel->url;
             $today = now()->toDateString();
             $data = [
@@ -79,7 +82,7 @@ class LimbahController extends Controller
                             ],
                             [
                                 'title' => 'Jumlah',
-                                'value' => $request->jumlah,
+                                'value' => [$request->jumlah, $request->uom],
                                 'short' => true,
                             ],
                             [
@@ -173,5 +176,25 @@ class LimbahController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // Export 
+    public function exportLimbah(Request $request)
+    {
+        // Validate the request data
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date'   => 'required|date|after_or_equal:start_date',
+        ]);
+
+        // Get the date range from the request
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        // Generate a filename based on the date range
+        $filename = 'limbahB3-data-' . $startDate . '_to_' . $endDate . '.xlsx';
+
+        // Download the Excel file
+        return Excel::download(new LimbahExport($startDate, $endDate), $filename);
     }
 }

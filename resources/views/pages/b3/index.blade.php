@@ -11,7 +11,10 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h5 class="align-self-center">Pencatatan Limbah B3</h5>
-                <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#penetrasiModal">Tambah Data</a>
+                <div class="button">
+                    <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalExport">Export Data</a>
+                    <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#penetrasiModal">Tambah Data</a>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -95,7 +98,14 @@
                         </div>
                         <div class="col-md-12 mb-2">
                             <label for="" class="form-label">Jumlah</label>
-                            <input type="text" class="form-control" name="jumlah" placeholder="2 KG / 2 Liter" required>       
+                            <input type="number" class="form-control" name="jumlah" placeholder="2" required>       
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <label for="" class="form-label">UOM</label>
+                            <select name="uom" class="form-control" id="">
+                                <option value="Kg">Kg</option>
+                                <option value="Liter">Liter</option>
+                            </select>   
                         </div>
                         <div class="col-md-12 mt-2">
                             <button class="btn btn-primary w-100" type="submit">Simpan Data</button>
@@ -107,6 +117,36 @@
     </div>
 </div>
 <!-- End -->
+
+<!-- Modal Export -->
+<div class="modal fade" id="modalExport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Export Data Limbah B3</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('export-limbah')}}" method="GET">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label for="" class="form-label">Dari Tanggal</label>
+                            <input type="date" class="form-control" name="start_date" required>    
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="" class="form-label">Sampai Tanggal</label>
+                            <input type="date" class="form-control" name="end_date" required>    
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <button class="btn btn-primary w-100" type="submit">Export Data</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('plugin-scripts')

@@ -260,6 +260,7 @@ Route::controller(LoginController::class)->group(function(){
 
 // Limbah B3
 Route::resource('pencatatan-limbah',App\Http\Controllers\B3\LimbahController::class);
+Route::get('/export-limbah', [App\Http\Controllers\B3\LimbahController::class, 'exportLimbah'])->name('export-limbah');
 
 Route::post('/logout', function () {
     Auth::logout();
