@@ -56,7 +56,7 @@ class LimbahController extends Controller
             $limbahdata->uom = $request->uom;
             $limbahdata->save();
 
-            $slackChannel = Slack::where('channel', 'Testing Channel')->first();
+            $slackChannel = Slack::where('channel', 'Limbah B3')->first();
             $slackWebhookUrl = $slackChannel->url;
             $today = now()->toDateString();
             $data = [
