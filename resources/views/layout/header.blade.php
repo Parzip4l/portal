@@ -311,8 +311,9 @@
           </a>
           <div class="submenu">
             <ul class="submenu-item">
-              <li class="nav-item"><a href="{{ url('#') }}" class="nav-link {{ active_class(['icons/feather-icons']) }}">Maitenance History</a></li>
-              <li class="nav-item"><a href="{{ url('#') }}" class="nav-link {{ active_class(['icons/mdi-icons']) }}">Assets</a></li>
+                <li class="nav-item"><a href="{{ url('maintenance-ticket') }}" class="nav-link {{ active_class(['maintenance-ticket']) }}">Maitenance Ticket</a></li>
+                <li class="nav-item"><a href="{{ url('#') }}" class="nav-link {{ active_class(['icons/feather-icons']) }}">Maitenance History</a></li>
+                <li class="nav-item"><a href="{{ url('#') }}" class="nav-link {{ active_class(['icons/mdi-icons']) }}">Assets</a></li>
             </ul>
           </div>
         </li>
