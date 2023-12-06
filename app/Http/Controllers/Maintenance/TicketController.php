@@ -223,6 +223,16 @@ class TicketController extends Controller
                                 'short' => true,
                             ],
                             [
+                                'title' => 'Tanggal Mulai',
+                                'value' => $request->tanggal_mulai,
+                                'short' => true,
+                            ],
+                            [
+                                'title' => 'Tanggal Selesai',
+                                'value' => $request->tanggal_selesai,
+                                'short' => true,
+                            ],
+                            [
                                 'title' => 'Lihat Detail Data Di Champoil Portal',
                                 'value' => '(https://portal.champoil.co.id/maintenance-ticket)',
                                 'short' => true,
