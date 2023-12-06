@@ -69,7 +69,7 @@ class TicketController extends Controller
             $tiket->kategori = $request->kategori;
             $tiket->save();
 
-            $slackChannel = Slack::where('channel', 'Testing Channel')->first();
+            $slackChannel = Slack::where('channel', 'Maintenance Update')->first();
             $slackWebhookUrl = $slackChannel->url;
             $today = now()->toDateString();
             $data = [
@@ -193,7 +193,7 @@ class TicketController extends Controller
             // Simpan perubahan
             $maintenanceTicket->save();
 
-            $slackChannel = Slack::where('channel', 'Testing Channel')->first();
+            $slackChannel = Slack::where('channel', 'Maintenance Update')->first();
             $slackWebhookUrl = $slackChannel->url;
             $today = now()->toDateString();
             $data = [
