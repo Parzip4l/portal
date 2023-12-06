@@ -41,7 +41,14 @@
                                 @else
                                     <td><span class="badge bg-success">{{ $data->status }}</span></td>
                                 @endif
-                                <td> {{ $data->kategori }} </td>
+                                
+                                @if($data->kategori === 'High')
+                                    <td><span class="badge bg-danger">{{ $data->kategori }}</span></td>
+                                @elseif($data->kategori === 'Medium')
+                                    <td><span class="badge bg-warning">{{ $data->kategori }}</span></td>
+                                @else
+                                    <td><span class="badge bg-primary">{{ $data->kategori }}</span></td>
+                                @endif
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-link p-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
