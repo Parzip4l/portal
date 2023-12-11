@@ -212,6 +212,10 @@
                             <input type="number" class="form-control" name="heavy_loader" required>
                         </div>
                         <div class="col-md-6 mb-2">
+                            <label for="" class="form-label">Heavy Loader 4Kg</label>
+                            <input type="number" class="form-control" name="hl" required>
+                        </div>
+                        <div class="col-md-6 mb-2">
                             <label for="" class="form-label">XTREME</label>
                             <input type="number" class="form-control" name="xtreme" required>
                         </div>
@@ -282,6 +286,10 @@
                         <div class="col-md-6 mb-2">
                             <label for="" class="form-label">Heavy Loader</label>
                             <input type="number" class="form-control" name="heavy_loader" required>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="" class="form-label">Heavy Loader 4Kg</label>
+                            <input type="number" class="form-control" name="hl" required>
                         </div>
                         <div class="col-md-6 mb-2">
                             <label for="" class="form-label">XTREME</label>

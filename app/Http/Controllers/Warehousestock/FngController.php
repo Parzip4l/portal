@@ -52,6 +52,7 @@ class FngController extends Controller
             $purchase->super = $request->super;
             $purchase->f300 = $request->f300;
             $purchase->heavy_loader = $request->heavy_loader;
+            $purchase->hl = $request->hl;
             $purchase->xtreme = $request->xtreme;
             $purchase->power_15 = $request->power_15;
             $purchase->power_10 = $request->power_10;
@@ -60,7 +61,7 @@ class FngController extends Controller
             $purchase->active_10 = $request->active_10;
             $purchase->save();
 
-            $slackChannel = Slack::where('channel', 'Warehouse')->first();
+            $slackChannel = Slack::where('channel', 'Testing Channel')->first();
             $slackWebhookUrl = $slackChannel->url;
             $today = now()->toDateString();
             $data = [
@@ -97,6 +98,11 @@ class FngController extends Controller
                             [
                                 'title' => 'Heavy Loader',
                                 'value' => $request->heavy_loader . ' Pail',
+                                'short' => true,
+                            ],
+                            [
+                                'title' => 'Heavy Loader 4Kg',
+                                'value' => $request->hl . ' Pail',
                                 'short' => true,
                             ],
                             [
