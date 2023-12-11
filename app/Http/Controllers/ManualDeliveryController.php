@@ -202,7 +202,7 @@ class ManualDeliveryController extends Controller
         $delivery->save();
 
             $dataItemUpdate = json_decode($delivery->items, true);
-            $slackChannel = Slack::where('channel', 'Testing Channel')->first();
+            $slackChannel = Slack::where('channel', 'Jadwal Pengiriman')->first();
             $slackWebhookUrl = $slackChannel->url;
             $today = now()->toDateString();
             $data = [
