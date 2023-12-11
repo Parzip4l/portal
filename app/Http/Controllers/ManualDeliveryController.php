@@ -61,7 +61,7 @@ class ManualDeliveryController extends Controller
             $purchase->items = json_encode($request->only(['nama_barang', 'total_order', 'sisa_order','order_dikirim']));
             $purchase->save();
 
-            $slackChannel = Slack::where('channel', 'Testing Channel')->first();
+            $slackChannel = Slack::where('channel', 'Jadwal Pengiriman')->first();
             $slackWebhookUrl = $slackChannel->url;
             $dataItem = json_decode($purchase->items, true);
             $today = now()->toDateString();
