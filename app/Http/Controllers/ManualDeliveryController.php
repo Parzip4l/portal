@@ -58,10 +58,10 @@ class ManualDeliveryController extends Controller
             $purchase->nomor_so = $request->nomor_so;
             $purchase->ekspedisi = $request->ekspedisi;
             $purchase->keterangan = $request->keterangan;
-            $purchase->items = json_encode($request->only(['nama_barang', 'total_order', 'sisa_order']));
+            $purchase->items = json_encode($request->only(['nama_barang', 'total_order', 'sisa_order','order_dikirim']));
             $purchase->save();
 
-            $slackChannel = Slack::where('channel', 'Jadwal Pengiriman')->first();
+            $slackChannel = Slack::where('channel', 'Testing Channel')->first();
             $slackWebhookUrl = $slackChannel->url;
             $dataItem = json_decode($purchase->items, true);
             $today = now()->toDateString();
@@ -144,7 +144,7 @@ class ManualDeliveryController extends Controller
         $formattedItems = [];
 
         foreach ($items['nama_barang'] as $index => $namaBarang) {
-            $formattedItems[] = "*Nama Barang:* $namaBarang\n*Total Order:* {$items['total_order'][$index]}\n*Sisa Order:* {$items['sisa_order'][$index]}\n";
+            $formattedItems[] = "*Nama Barang:* $namaBarang\n*Total Order:* {$items['total_order'][$index]}\n*Sisa Order:* {$items['sisa_order'][$index]}\n*Orderan Terkirim:* {$items['order_dikirim'][$index]}\n";
         }
 
         return implode("\n", $formattedItems);

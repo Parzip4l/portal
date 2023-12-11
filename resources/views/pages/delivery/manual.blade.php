@@ -53,6 +53,9 @@
                                 @foreach ($jsonData['nama_barang'] as $index => $namaBarang)
                                     <p>Nama Barang: {{$namaBarang}}</p>
                                     <p>Total Order: {{$jsonData['total_order'][$index]}}</p>
+                                    @if(isset($jsonData['order_dikirim'][$index]))
+                                        <p>Orderan Terkirim: {{$jsonData['order_dikirim'][$index]}}</p>
+                                    @endif
                                     <p>Sisa Order: {{$jsonData['sisa_order'][$index]}}</p>
                                 @endforeach
                             @else
@@ -75,8 +78,6 @@
                                     <option value="On Hold" {{$data->status == 'On Hold' ? 'selected' : ''}}>On Hold</option>
                                     <option value="Dikirim Sebagian" {{$data->status == 'Dikirim Sebagian' ? 'selected' : ''}}>Dikirim Sebagian</option>
                                 </select>
-                                
-                            
                         </td>
                         <td>
                             <button type="submit" class="btn btn-primary w-100 mt-2">Update Status</button>
@@ -135,6 +136,10 @@
                                 <input type="text" class="form-control" name="total_order[]" required>
                             </div>
                             <div class="col-md-6 mb-2">
+                                <label for="" class="form-label">Orderan Yang Dikirim</label>
+                                <input type="text" class="form-control" name="order_dikirim[]">
+                            </div>
+                            <div class="col-md-6 mb-2">
                                 <label for="" class="form-label">Sisa Order</label>
                                 <input type="text" class="form-control" name="sisa_order[]">
                             </div>
@@ -145,6 +150,7 @@
                         <div class="col-md-6 mb-2">
                             <label for="" class="form-label">Driver</label>
                             <select name="driver" class="form-control" id="">
+                                <option value="-">-</option>
                                 <option value="Adi Rusman">Adi Rusman</option>
                                 <option value="Aas">Aas</option>
                                 <option value="Febri Andrianto">Febri Andrianto</option>
