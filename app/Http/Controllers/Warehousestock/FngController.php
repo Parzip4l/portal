@@ -61,7 +61,7 @@ class FngController extends Controller
             $purchase->active_10 = $request->active_10;
             $purchase->save();
 
-            $slackChannel = Slack::where('channel', 'Testing Channel')->first();
+            $slackChannel = Slack::where('channel', 'Warehouse')->first();
             $slackWebhookUrl = $slackChannel->url;
             $today = now()->toDateString();
             $data = [
