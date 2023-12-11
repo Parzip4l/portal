@@ -45,7 +45,6 @@ class ManualDeliveryController extends Controller
     public function store(Request $request)
     {
         try {
-
             $tanggalOrder = Carbon::parse($request->tanggal_order);
             $targetKirim = $tanggalOrder->addDays(7)->toDateString();
             // Simpan data pembelian
@@ -58,14 +57,13 @@ class ManualDeliveryController extends Controller
             $purchase->status = $request->status;
             $purchase->nomor_so = $request->nomor_so;
             $purchase->ekspedisi = $request->ekspedisi;
-            $purchase->nama_barang = $request->nama_barang;
-            $purchase->total_order = $request->total_order;
-            $purchase->sisa_order = $request->sisa_order;
             $purchase->keterangan = $request->keterangan;
+            $purchase->items = json_encode($request->only(['nama_barang', 'total_order', 'sisa_order']));
             $purchase->save();
 
             $slackChannel = Slack::where('channel', 'Jadwal Pengiriman')->first();
             $slackWebhookUrl = $slackChannel->url;
+            $dataItem = json_decode($purchase->items, true);
             $today = now()->toDateString();
             $data = [
                 'text' => "Orderan {$request->customer} Pada Tanggal {$request->tanggal_order}",
@@ -79,19 +77,14 @@ class ManualDeliveryController extends Controller
                                 'short' => true,
                             ],
                             [
-                                'title' => 'Nama Barang',
-                                'value' => $request->nama_barang,
-                                'short' => true,
-                            ],
-                            [
-                                'title' => 'Total Order',
-                                'value' => $request->total_order,
-                                'short' => true,
-                            ],
-                            [
                                 'title' => 'Status Pengiriman',
                                 'value' => $request->status,
                                 'short' => true,
+                            ],
+                            [
+                                'title' => '',
+                                'value' => $this->formatItemsForSlack($dataItem),
+                                'short' => false,
                             ],
                             [
                                 'title' => 'Keterangan',
@@ -100,7 +93,7 @@ class ManualDeliveryController extends Controller
                             ],
                             [
                                 'title' => 'Lihat Detail Data Di Champoil Portal',
-                                'value' => '(https://portal.champoil.co.id/manual-delivery)',
+                                'value' => '(https://portal.champoil.co.id/manual-delivery/)',
                                 'short' => true,
                             ]
                         ],
@@ -146,6 +139,17 @@ class ManualDeliveryController extends Controller
         }
     }
 
+    function formatItemsForSlack($items)
+    {
+        $formattedItems = [];
+
+        foreach ($items['nama_barang'] as $index => $namaBarang) {
+            $formattedItems[] = "*Nama Barang:* $namaBarang\n*Total Order:* {$items['total_order'][$index]}\n*Sisa Order:* {$items['sisa_order'][$index]}\n";
+        }
+
+        return implode("\n", $formattedItems);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -154,7 +158,15 @@ class ManualDeliveryController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $item = ManualDelivery::findOrFail($id); // Replace YourModel with the actual model you are working with
+
+            return view('pages.delivery.showmanual', compact('item'));
+            // Replace 'your_view' with the actual view you want to return,
+            // and pass any additional data as needed.
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to retrieve the item.');
+        }
     }
 
     /**
@@ -189,7 +201,8 @@ class ManualDeliveryController extends Controller
         $delivery->status = $status;
         $delivery->save();
 
-        $slackChannel = Slack::where('channel', 'Jadwal Pengiriman')->first();
+            $dataItemUpdate = json_decode($delivery->items, true);
+            $slackChannel = Slack::where('channel', 'Testing Channel')->first();
             $slackWebhookUrl = $slackChannel->url;
             $today = now()->toDateString();
             $data = [
@@ -204,14 +217,9 @@ class ManualDeliveryController extends Controller
                                 'short' => true,
                             ],
                             [
-                                'title' => 'Nama Barang',
-                                'value' => $delivery->nama_barang,
-                                'short' => true,
-                            ],
-                            [
-                                'title' => 'Total Order',
-                                'value' => $delivery->total_order,
-                                'short' => true,
+                                'title' => '',
+                                'value' => $this->formatItemsForSlack($dataItemUpdate),
+                                'short' => false,
                             ],
                             [
                                 'title' => 'Status Pengiriman',

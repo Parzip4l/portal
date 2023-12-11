@@ -31,15 +31,16 @@
                     <th>Target Kirim</th>
                     <th>SO Number</th>
                     <th>Ekspedisi</th>
-                    <th>Nama Barang</th>
-                    <th>Total Order</th>
-                    <th>Sisa Order</th>
+                    <th>Data Barang</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                     @foreach($data as $data)
+                    @php 
+                        $jsonData = json_decode($data->items, true);
+                    @endphp
                     <tr>
                         <td>{{$data->customer}}</td>
                         <td>{{$data->tanggal_order}}</td>
@@ -47,9 +48,19 @@
                         <td>{{$data->target_kirim}}</td>
                         <td>{{$data->nomor_so}}</td>
                         <td>{{$data->ekspedisi}}</td>
-                        <td>{{$data->nama_barang}}</td>
-                        <td>{{$data->total_order}}</td>
-                        <td>{{$data->sisa_order}}</td>
+                        <td>
+                            @if ($jsonData !== null)
+                                @foreach ($jsonData['nama_barang'] as $index => $namaBarang)
+                                    <p>Nama Barang: {{$namaBarang}}</p>
+                                    <p>Total Order: {{$jsonData['total_order'][$index]}}</p>
+                                    <p>Sisa Order: {{$jsonData['sisa_order'][$index]}}</p>
+                                @endforeach
+                            @else
+                                <p>Nama Barang: {{$data->nama_barang}}</p>
+                                <p>Total Order: {{$data->total_order}}</p>
+                                <p>Sisa Order: {{$data->sisa_order}}</p>
+                            @endif
+                        </td>
                         <form action="{{ route('manual-delivery.update', $data->id) }}" method="POST">
                         <td>
                             
@@ -89,7 +100,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{route('manual-delivery.store')}}" method="POST">
+                <form action="{{route('manual-delivery.store')}}" method="POST" id="orderForm">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 mb-2">
@@ -113,20 +124,23 @@
                             <input type="text" class="form-control" name="ekspedisi" required>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-2">
-                            <label for="" class="form-label">Nama Barang</label>
-                            <input type="text" class="form-control" name="nama_barang" required>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label for="" class="form-label">Total Order</label>
-                            <input type="text" class="form-control" name="total_order" required>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label for="" class="form-label">Sisa Order</label>
-                            <input type="text" class="form-control" name="sisa_order">
+                    <div id="itemContainer">
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label for="" class="form-label">Nama Barang</label>
+                                <input type="text" class="form-control" name="nama_barang[]" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="" class="form-label">Total Order</label>
+                                <input type="text" class="form-control" name="total_order[]" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="" class="form-label">Sisa Order</label>
+                                <input type="text" class="form-control" name="sisa_order[]">
+                            </div>
                         </div>
                     </div>
+                    <button type="button" id="addButton" class="btn btn-primary mb-2">Tambah Jenis Barang</button>
                     <div class="row">
                         <div class="col-md-6 mb-2">
                             <label for="" class="form-label">Driver</label>
@@ -271,4 +285,26 @@
     });
 });
 </script>
+<script>
+    $(document).ready(function () {
+        // Counter for unique IDs
+        var uniqueIdCounter = 0;
+
+        // Add new row on button click
+        $("#addButton").on("click", function () {
+            var newItem = $("#itemContainer .row:first").clone();
+
+            // Update IDs to ensure uniqueness
+            newItem.find('input').each(function () {
+                var oldId = $(this).attr('id');
+                var newId = oldId + "_" + uniqueIdCounter;
+                $(this).attr('id', newId).val('');
+            });
+
+            $("#itemContainer").append(newItem);
+            uniqueIdCounter++;
+        });
+    });
+</script>
+
 @endpush

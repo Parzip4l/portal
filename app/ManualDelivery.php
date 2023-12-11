@@ -9,5 +9,5 @@ class ManualDelivery extends Model
 {
     use HasFactory;
     protected $table = 'manual_deliveries';
-    protected $fillable = ['id'];
+    protected $fillable = ['tanggal_order','tanggal_kirim','target_kirim','customer','driver','status','nomor_so','ekspedisi','keterangan','items'];
 }
