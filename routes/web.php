@@ -265,6 +265,9 @@ Route::get('/export-limbah', [App\Http\Controllers\B3\LimbahController::class, '
 // Maintenance Ticket
 Route::resource('maintenance-ticket',App\Http\Controllers\Maintenance\TicketController::class);
 
+// Oli Delivery
+Route::resource('pencatatan-oli',App\Http\Controllers\Oli\OliController::class);
+
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('login');
