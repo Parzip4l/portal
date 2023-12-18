@@ -24,6 +24,7 @@
                                 <th>Pengirim</th>
                                 <th>Jenis Oli</th>
                                 <th>Jumlah</th>
+                                <th>Receive Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -34,6 +35,17 @@
                                 <td> {{ $data->pengirim }} </td>
                                 <td> {{ $data->jenis_oli }} </td>
                                 <td> {{ $data->jumlah }} </td>
+                                <form action="{{ route('pencatatan-oli.update', $data->id) }}" method="POST">
+                                <td> 
+                                    @csrf
+                                    @method('PUT')
+                                    <select name="receive_status" class="form-control mb-1">
+                                        <option value="Not Received" {{$data->receive_status == 'Not Received' ? 'selected' : ''}}>Not Received</option>
+                                        <option value="Received" {{$data->receive_status == 'Received' ? 'selected' : ''}}>Received</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-sm btn-primary w-100">Update</button>
+                                </td>
+                                </form>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-link p-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

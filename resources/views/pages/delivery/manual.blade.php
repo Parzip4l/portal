@@ -66,18 +66,17 @@
                         </td>
                         <form action="{{ route('manual-delivery.update', $data->id) }}" method="POST">
                         <td>
-                            
-                                @csrf
-                                @method('PUT')
-                                <select name="status" class="form-control">
-                                    <option value="Done" {{$data->status == 'Done' ? 'selected' : ''}}>Done</option>
-                                    <option value="On Progress" {{$data->status == 'On Progress' ? 'selected' : ''}}>On Progress</option>
-                                    <option value="On Delivery" {{$data->status == 'On Delivery' ? 'selected' : ''}}>On Delivery</option>
-                                    <option value="Delayed" {{$data->status == 'Delayed' ? 'selected' : ''}}>Delayed</option>
-                                    <option value="Cancel" {{$data->status == 'Cancel' ? 'selected' : ''}}>Cancel</option>
-                                    <option value="On Hold" {{$data->status == 'On Hold' ? 'selected' : ''}}>On Hold</option>
-                                    <option value="Dikirim Sebagian" {{$data->status == 'Dikirim Sebagian' ? 'selected' : ''}}>Dikirim Sebagian</option>
-                                </select>
+                            @csrf
+                            @method('PUT')
+                            <select name="status" class="form-control">
+                                <option value="Done" {{$data->status == 'Done' ? 'selected' : ''}}>Done</option>
+                                <option value="On Progress" {{$data->status == 'On Progress' ? 'selected' : ''}}>On Progress</option>
+                                <option value="On Delivery" {{$data->status == 'On Delivery' ? 'selected' : ''}}>On Delivery</option>
+                                <option value="Delayed" {{$data->status == 'Delayed' ? 'selected' : ''}}>Delayed</option>
+                                <option value="Cancel" {{$data->status == 'Cancel' ? 'selected' : ''}}>Cancel</option>
+                                <option value="On Hold" {{$data->status == 'On Hold' ? 'selected' : ''}}>On Hold</option>
+                                <option value="Dikirim Sebagian" {{$data->status == 'Dikirim Sebagian' ? 'selected' : ''}}>Dikirim Sebagian</option>
+                            </select>
                         </td>
                         <td>
                             <button type="submit" class="btn btn-primary w-100 mt-2">Update Status</button>

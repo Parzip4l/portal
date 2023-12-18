@@ -41,12 +41,14 @@ class OliController extends Controller
     public function store(Request $request)
     {
         try {
+            $defaultReceive = 'Not Received';
             // Simpan data pembelian
             $olidata = new PengirimanOli();
             $olidata->tanggal = now();
             $olidata->pengirim = $request->pengirim;
             $olidata->jenis_oli = $request->jenis_oli;
             $olidata->jumlah = $request->jumlah;
+            $olidata->receive_status = $defaultReceive;
             $olidata->save();
 
             $slackChannel = Slack::where('channel', 'Data Oli')->first();
@@ -157,7 +159,16 @@ class OliController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $delivery = PengirimanOli::find($id);
+        $status = $request->input('receive_status');
+        if (!$delivery) {
+            return response()->json(['error' => 'Delivery not found.'], 404);
+        }
+
+        // Update the status
+        $delivery->receive_status = $status;
+        $delivery->save();
+        return redirect()->back()->with('success', 'Status updated successfully.');
     }
 
     /**
