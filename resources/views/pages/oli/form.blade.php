@@ -26,6 +26,7 @@
                                 <option value="Bahan">Bahan</option>
                                 <option value="Service">Service</option>
                                 <option value="Trafo">Trafo</option>
+                                <option value="Minarex">Minarex</option>
                             </select>   
                         </div>
                         <div class="col-md-12 mb-2">
