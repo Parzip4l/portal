@@ -342,7 +342,9 @@
             </a>
             <div class="submenu">
                 <ul class="submenu-item">
-                    <li class="nav-item"><a href="{{ url('/#') }}" class="nav-link {{ active_class(['#']) }}">Qc</a></li>
+                    <li class="nav-item">
+                        <a href="{{ url('rnd-check') }}" class="nav-link {{ active_class(['#']) }}">Qc</a>
+                    </li>
                     <li class="nav-item"><a href="{{ url('rnd-check') }}" class="nav-link {{ active_class(['rnd-check']) }}">RnD</a></li>
                     <li class="nav-item"><a href="{{ url('pencatatan-limbah') }}" class="nav-link {{ active_class(['pencatatan-limbah']) }}">Pencatatan Limbah B3</a></li>
                 </ul>

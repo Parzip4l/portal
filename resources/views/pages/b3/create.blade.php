@@ -37,7 +37,14 @@
                         </div>
                         <div class="col-md-12 mb-2">
                             <label for="" class="form-label">Jumlah</label>
-                            <input type="text" class="form-control" name="jumlah" placeholder="2 KG / 2 Liter" required>       
+                            <input type="number" class="form-control" name="jumlah" placeholder="2" required>       
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <label for="" class="form-label">UOM</label>
+                            <select name="uom" class="form-control" id="">
+                                <option value="Kg">Kg</option>
+                                <option value="Liter">Liter</option>
+                            </select>   
                         </div>
                         <div class="col-md-12 mt-2">
                             <button class="btn btn-primary w-100" type="submit">Simpan Data</button>

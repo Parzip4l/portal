@@ -25,7 +25,7 @@
                                 <a href="" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#penetrasiModal">Tambah Data Baru</a>
                             </div>
                             <div class="col-md-6 text-right">
-                                <a href="{{route('lastyear.check')}}" class="btn btn-primary text-right">Data 2023</a>
+                                <a href="{{route('rnd-check.index')}}" class="btn btn-primary text-right">Data 2024</a>
                             </div>
                         </div>
                         <div class="table-responsive">

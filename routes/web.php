@@ -148,6 +148,8 @@ Route::middleware(['auth', 'permission:inventory_access,formulation_access'])->g
 Route::middleware(['auth', 'permission:formulation_access'])->group(function () {
     Route::resource('rnd-check', App\Http\Controllers\Rnd\PenetrasiController::class);
     Route::resource('rnd-check-kuhl', App\Http\Controllers\Rnd\KuhlController::class);
+
+    Route::get('/rnd-check-2023', [App\Http\Controllers\Rnd\PenetrasiController::class, 'LastYearData'])->name('lastyear.check');
 });
 
 Route::middleware(['auth', 'permission:ops_access'])->group(function () {

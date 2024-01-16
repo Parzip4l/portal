@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Kuhl;
 use App\Penetrasi;
 use App\Slack;
+use Carbon\Carbon;
 
 class PenetrasiController extends Controller
 {
@@ -19,11 +20,22 @@ class PenetrasiController extends Controller
 
     public function index()
     {
-        $kuhl = Kuhl::all();
-        $penetrasi = Penetrasi::all();
+        $tahunSekarang = Carbon::now()->year;
+
+        $kuhl = Kuhl::whereYear('created_at',$tahunSekarang)->get();
+        $penetrasi = Penetrasi::whereYear('created_at',$tahunSekarang)->get();
         return view('pages.rnd.checker', compact('kuhl', 'penetrasi'));
     }
 
+    public function LastYearData()
+    {
+        $tahunSebelumnya = Carbon::now()->subYear()->year;
+        $kuhl = Kuhl::whereYear('created_at',$tahunSebelumnya)->get();
+        $penetrasi = Penetrasi::whereYear('created_at',$tahunSebelumnya)->get();
+
+        return view('pages.rnd.checker2023', compact('kuhl', 'penetrasi'));
+    }
+ 
 
     /**
      * Show the form for creating a new resource.
