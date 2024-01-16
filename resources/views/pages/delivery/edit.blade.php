@@ -43,18 +43,6 @@
                     <input type="text" class="form-control" name="ekspedisi" value="{{ $data->ekspedisi }}" required>
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="" class="form-label">Nama Barang</label>
-                    <input type="text" class="form-control" name="nama_barang" value="{{ $data->nama_barang }}" required>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <label for="" class="form-label">Total Order</label>
-                    <input type="text" class="form-control" name="total_order" value="{{ $data->total_order }}" required>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <label for="" class="form-label">Sisa Order</label>
-                    <input type="text" class="form-control" name="sisa_order" value="{{ $data->sisa_order }}" >
-                </div>
-                <div class="col-md-6 mb-2">
                     <label for="" class="form-label">Driver</label>
                     <select name="driver" class="form-control" id="">
                         <option value="Adi Rusman" {{$data->driver == 'Adi Rusman' ? 'selected' : ''}}>Adi Rusman</option>
@@ -73,10 +61,6 @@
                         <option value="On Hold" {{$data->status == 'On Hold' ? 'selected' : ''}}>On Hold</option>
                         <option value="Dikirim Sebagian" {{$data->status == 'Dikirim Sebagian' ? 'selected' : ''}}>Dikirim Sebagian</option>
                     </select>
-                </div>
-                <div class="col-md-12 mb-2">
-                    <label for="" class="form-label">Keterangan</label>
-                    <input type="text" class="form-control" name="keterangan" value="{{$data->keterangan}}">
                 </div>
                 <div class="col-md-12 mt-2">
                     <button class="btn btn-primary w-100" type="submit">Simpan Data</button>
