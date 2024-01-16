@@ -46,7 +46,7 @@
                         <td>{{$data->tanggal_order}}</td>
                         <td>{{$data->tanggal_kirim}}</td>
                         <td>{{$data->target_kirim}}</td>
-                        <td>{{$data->nomor_so}}</td>
+                        <td><a href="{{route('manual-delivery.edit', $data->id)}}">{{$data->nomor_so}}</a></td>
                         <td>{{$data->ekspedisi}}</td>
                         <td>
                             @if ($jsonData !== null)
